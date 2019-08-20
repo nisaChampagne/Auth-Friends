@@ -37,15 +37,15 @@ h5 {
 
 
 .input {
-  display: block;
-  width: 100%;
+  width: 90%;
   border: 0;
   border-radius: 5px;
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
   font-size: inherit;
   font-family: inherit;
-  padding: 6px 10px;
+  padding: 5px 8px;
   margin-top: 10px;
+  margin-left: 10px;
   background-color: #fafafa;
 }
 
@@ -54,10 +54,10 @@ h5 {
 }
 
 .label {
-  font-size: 12px;
-  color: #999;
+  font-size: 15px;
+  font-family: inherit;
+  color: rgba(1, 0, 7);
   margin-bottom: 10px;
-  display: block;
 }
 
 .form-group {
@@ -71,7 +71,6 @@ h5 {
   border-radius: 5px;
   padding: 10px 15px;
   font-family: inherit;
-  font-size: 14px;
   background-color: #263238;
   color: #fff;
   cursor: pointer;
@@ -86,6 +85,9 @@ h5 {
 
 .Friend{
   max-width: 500px;
+  background: white;
+  border-radius: 5px;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
   margin: auto;
   margin-bottom: 20px;
   display: flex;

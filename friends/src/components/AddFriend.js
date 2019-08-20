@@ -1,39 +1,46 @@
 import React, { useState } from "react";
-import  { axiosWithAuth }from "../utillities/axiosWithAuth";
+import axios from "axios";
 
-function AddFriend () {
+function AddFriend() {
   const [name, setName] = useState({
     name: "",
     age: "",
     email: "",
     id: Date.now()
   });
-  const changeHandler = event => {
-    event.preventDefault();
-    setName({ ...name, [event.target.name]: event.target.value });
+  const changeHandler = e => {
+    e.preventDefault();
+    setName({ ...name, [e.target.name]: e.target.value });
   };
 
-  function addFriend(e) {
-    e.preventDefault();
-    axiosWithAuth()
-      .post("http://localhost:5000/api/friends", name)
-      .then(res =>{
-      console.log('friends', res.data)
-      })
-      .catch(err => {
-          console.log(err.response)
-      });
-      window.location.href = window.location.href;
-  }
+  const addFriend = e => {
+    e.preventDefault(); /*stops the page from refreshing upon clicking add btn*/
+    const token = localStorage.getItem("token");
+    const url = "http://localhost:5000/api/friends";
+
+    if (token) {
+      axios
+        .get(url, {
+          headers: {
+            Authorization: `${token}`
+          }
+        })
+        .then(res => {
+          console.log("friends", res.data);
+        })
+        .catch(err => {
+          console.log(err.response);
+        });
+      window.location.href = window.location.href; //helps with my hacking add friend
+    }
+  };
 
   return (
     <div className="addContainer">
-      <form
-        className="form"
-        onSubmit={event => addFriend(event)}>
+      <form className="form" onSubmit={event => addFriend(event)}>
         <h1 className="loginTitle">Add More Friends</h1>
         <p className="form-group">
-          <label>
+          <label className="label">
             Name:
             <input
               className="input"
@@ -46,7 +53,7 @@ function AddFriend () {
         </p>
 
         <p className="form-group">
-          <label>
+          <label className="label">
             Age:
             <input
               className="input"
@@ -59,7 +66,7 @@ function AddFriend () {
         </p>
 
         <p className="form-group">
-          <label>
+          <label className="label">
             Email:
             <input
               className="input"
@@ -77,6 +84,9 @@ function AddFriend () {
       </form>
     </div>
   );
-};
+}
 
 export default AddFriend;
+{
+  /* POST REQ TO SERVER */
+}

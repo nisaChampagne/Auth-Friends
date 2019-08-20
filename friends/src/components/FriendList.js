@@ -1,33 +1,33 @@
 import React, { useState, useEffect } from "react";
-import axios from 'axios'
+import axios from "axios";
 import AddFriend from "./AddFriend";
 import Friend from "./Friend";
 
-const FriendList = ({history}) => {
-    const [ friends , setFriends ] = useState('')
-    useEffect(() => {
-        const token = localStorage.getItem("token")
-        const url = "http://localhost:5000/api/friends";
-    
-        if (token) {
-          axios
-            .get(url, {
-              headers: {
-                Authorization: `${token}` 
-              }
-            })
-            .then(response => {
-              setFriends(response.data);
-            })
-            .catch(e => {
-              console.log(e.response.data);
-              localStorage.removeItem("token");
-              history.push("/");
-            });
-        }
-      }, [history]);
+function FriendList({ history }) {
+  const [friends, setFriends] = useState("");
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    const url = "http://localhost:5000/api/friends";
+
+    if (token) {
+      axios
+        .get(url, {
+          headers: {
+            Authorization: `${token}`
+          }
+        })
+        .then(response => {
+          setFriends(response.data);
+        })
+        .catch(e => {
+          console.log(e.response.data);
+          localStorage.removeItem("token");
+          history.push("/");
+        });
+    }
+  }, [history]);
   return (
-    <div className='holder'>
+    <div className="holder">
       <AddFriend />
       {friends.length > 0
         ? friends.map(friend => <Friend key={friend.id} friend={friend} />)
@@ -37,13 +37,16 @@ const FriendList = ({history}) => {
         className="btn"
         onClick={() => {
           localStorage.removeItem("token");
-          history.push('/')
+          history.push("/");
         }}
       >
         Logout
       </button>
     </div>
   );
-};
+}
 
 export default FriendList;
+
+  /* GET REQ TO SERVER */
+

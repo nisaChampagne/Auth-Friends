@@ -3,12 +3,17 @@ import { withFormik, Form, Field } from "formik";
 import * as Yup from "yup";
 import axios from "axios";
 
-function Login({ touched, errors}) {
+function Login({ touched, errors }) {
   return (
     <Form className="form">
       <div className="form-group">
         <label className="label">UserName: </label>
-        <Field className="input" name="username" type="text" autoComplete="off" />
+        <Field
+          className="input"
+          name="username"
+          type="text"
+          autoComplete="off"
+        />
         <p>{touched.email && errors.email}</p>
       </div>
       <div className="form-group">
@@ -35,8 +40,7 @@ export default withFormik({
     };
   },
   validationSchema: Yup.object().shape({
-    username: Yup.string()
-      .required(),
+    username: Yup.string().required(),
     password: Yup.string()
       .min(6)
       .required()
@@ -54,3 +58,7 @@ export default withFormik({
       });
   }
 })(Login);
+
+{
+  /* POST REQ TO SERVER */
+}
