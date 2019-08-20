@@ -3,12 +3,12 @@ import { withFormik, Form, Field } from "formik";
 import * as Yup from "yup";
 import axios from "axios";
 
-function Login({ touched, errors, history }) {
+function Login({ touched, errors}) {
   return (
     <Form className="form">
       <div className="form-group">
-        <label className="label">Email</label>
-        <Field className="input" name="email" type="email" autoComplete="off" />
+        <label className="label">UserName: </label>
+        <Field className="input" name="username" type="text" autoComplete="off" />
         <p>{touched.email && errors.email}</p>
       </div>
       <div className="form-group">
@@ -30,28 +30,49 @@ function Login({ touched, errors, history }) {
 export default withFormik({
   mapPropsToValues() {
     return {
-      email: "",
+      username: "",
       password: ""
     };
   },
   validationSchema: Yup.object().shape({
-    email: Yup.string()
-      .email()
+    username: Yup.string()
       .required(),
     password: Yup.string()
       .min(6)
       .required()
   }),
   handleSubmit(values, formikBag) {
-    const url = "https://localhost:5000";
+    const url = "http://localhost:5000/api/login";
     axios
       .post(url, values)
-      .then(response => {
-        localStorage.setItem("token", response.data.token);
-        formikBag.props.history.push("/profile");
+      .then(res => {
+        localStorage.setItem("token", res.data.payload);
+        formikBag.props.history.push("/friendlist");
       })
       .catch(e => {
-        console.log(e.response.data);
+        console.log(e.response);
       });
   }
 })(Login);
+
+
+  // const changeHandler = event => {
+  //   event.preventDefault();
+  //   setName({ ...name, [event.target.name]: event.target.value });
+  // };
+
+  // const handleSubmit = event => {
+  //   event.preventDefault();
+  // };
+
+  // const login = e => {
+  //   e.preventDefault();
+  //   axios
+  //     .post("http://localhost:5000/api/login", name)
+  //     .then(res => {
+  //       localStorage.setItem("token", res.data.payload);
+  //     })
+  //     .catch(err => console.log(err.response));
+  //   props.history.push("/protected");
+  // };
+
