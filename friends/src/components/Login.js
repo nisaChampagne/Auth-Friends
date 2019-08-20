@@ -54,25 +54,3 @@ export default withFormik({
       });
   }
 })(Login);
-
-
-  // const changeHandler = event => {
-  //   event.preventDefault();
-  //   setName({ ...name, [event.target.name]: event.target.value });
-  // };
-
-  // const handleSubmit = event => {
-  //   event.preventDefault();
-  // };
-
-  // const login = e => {
-  //   e.preventDefault();
-  //   axios
-  //     .post("http://localhost:5000/api/login", name)
-  //     .then(res => {
-  //       localStorage.setItem("token", res.data.payload);
-  //     })
-  //     .catch(err => console.log(err.response));
-  //   props.history.push("/protected");
-  // };
-

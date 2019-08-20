@@ -1,6 +1,6 @@
 import React from 'react';
 
-function Friend({friend}) {
+function Friend ({friend}) {
  console.log('friends props', friend)
 
     return (
@@ -9,8 +9,7 @@ function Friend({friend}) {
         <div className="Friend__email">{friend.email}</div>
         <div className="Friend__age">age: {friend.age}</div>
           <button
-            className="btn"
-            size="22">Delete</button>
+            className="btn">Delete</button>
       </div>
     );
   }
