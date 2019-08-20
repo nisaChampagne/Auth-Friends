@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import axios from "axios";
+import AxiosWithAuth from "../utillities/axiosWithAuth";//easier to use this utility when axios.post the data so I can see the added friends
 
 function AddFriend() {
   const [name, setName] = useState({
@@ -15,24 +15,15 @@ function AddFriend() {
 
   const addFriend = e => {
     e.preventDefault(); /*stops the page from refreshing upon clicking add btn*/
-    const token = localStorage.getItem("token");
-    const url = "http://localhost:5000/api/friends";
-
-    if (token) {
-      axios
-        .get(url, {
-          headers: {
-            Authorization: `${token}`
-          }
-        })
-        .then(res => {
-          console.log("friends", res.data);
-        })
-        .catch(err => {
-          console.log(err.response);
-        });
-      window.location.href = window.location.href; //helps with my hacking add friend
-    }
+    AxiosWithAuth()
+      .post("http://localhost:5000/api/friends", name)
+      .then(res => {
+        console.log("friends", res.data);
+      })
+      .catch(err => {
+        console.log(err.response);
+      });
+    window.location.href = window.location.href; //helps
   };
 
   return (
