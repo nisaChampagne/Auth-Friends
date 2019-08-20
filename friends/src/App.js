@@ -7,6 +7,7 @@ import {
 } from "react-router-dom";
 import Login from "./components/Login";
 import FriendList from "./components/FriendList";
+import PrivateRoute from './components/PrivateRoute'
 import "./App.css";
 
 function App() {
@@ -39,21 +40,10 @@ function App() {
               return <Login {...props} />;
             }}
           />
-          <Route
+          <PrivateRoute
             exact
             path="/friendlist"
-            render={props => {
-              const token = localStorage.getItem("token");
-
-              /* getting the token form localStorage and setting it accessible to token*/
-
-              if (!token) {
-                /*if no token is present, will redirect to login*/
-
-                return <Redirect to="/" />;
-              }
-              return <FriendList {...props} />;
-            }}
+            component={FriendList}
           />
         </div>
       </div>
