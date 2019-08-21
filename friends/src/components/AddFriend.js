@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import AxiosWithAuth from "../utillities/axiosWithAuth";//easier to use this utility when axios.post the data so I can see the added friends
 
-function AddFriend() {
+function AddFriend({ setFriends }) {
   const [name, setName] = useState({
     name: "",
     age: "",
@@ -19,6 +19,7 @@ function AddFriend() {
       .post("http://localhost:5000/api/friends", name)
       .then(res => {
         console.log("friends", res.data);
+        setFriends( "friends", res.data)
       })
       .catch(err => {
         console.log(err.response);

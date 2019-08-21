@@ -20,7 +20,7 @@ function FriendList({ history }) {
 
   return (
     <div className="holder">
-      <AddFriend />
+      <AddFriend setFriends={setFriends} />
       {friends.length > 0
         ? friends.map(friend => <Friend key={friend.id} friend={friend} />)
         : null}
